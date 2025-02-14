@@ -13,7 +13,7 @@ class CheckoutRepoImpl extends CheckoutRepo {
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
     try {
       stripeService.doPayment(paymentIntentInputModel: paymentIntentInputModel);
-      return Right(null);
+      return const Right(null);
     } catch (e) {
       return left(ServerFailure(errmessage: e.toString()));
     }

@@ -5,10 +5,12 @@ import 'package:payment/core/utils/resources/values_manager.dart';
 
 // ignore: must_be_immutable
 class CheckoutButton extends StatelessWidget {
+  bool isLoading;
   CheckoutButton(
       {super.key,
       required this.total,
       required this.text,
+      this.isLoading = false,
       required this.onPressed});
   VoidCallback onPressed;
   final double total;
@@ -34,10 +36,12 @@ class CheckoutButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              text,
-              style: Styles.style22.copyWith(color: Colors.white),
-            ),
+            isLoading
+                ? const CircularProgressIndicator()
+                : Text(
+                    text,
+                    style: Styles.style22.copyWith(color: Colors.white),
+                  ),
             SizedBox(width: AppQuery.width(context, 2)),
             const Icon(Icons.payment, color: Colors.white, size: 24),
             SizedBox(width: AppQuery.width(context, 2)),

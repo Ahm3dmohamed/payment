@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment/core/utils/resources/color_manager.dart';
 import 'package:payment/core/utils/resources/values_manager.dart';
 import 'package:payment/core/widgets/build_appbar.dart';
 import 'package:payment/core/widgets/checkout_button.dart';
+import 'package:payment/features/checkout/data/repos/checkout_repo.dart';
+import 'package:payment/features/checkout/data/repos/checkout_repo_impl.dart';
+import 'package:payment/features/checkout/presentation/manager/cubit/payment_cubit_cubit.dart';
 import 'package:payment/features/checkout/presentation/views/payment_details_view.dart';
 import 'package:payment/features/checkout/widgets/payment_methods_bootomsheet.dart';
 import 'package:payment/features/checkout/widgets/payment_methods_listview.dart';
@@ -64,7 +68,12 @@ class _MyCartViewState extends State<MyCartView> {
                 )),
                 context: context,
                 builder: (context) {
-                  return const PaymentMethodsBottomSheet();
+                  return BlocProvider(
+                    create: (context) => PaymentCubit(
+                      CheckoutRepoImpl(),
+                    ),
+                    child: const PaymentMethodsBottomSheet(),
+                  );
                 },
               );
             },
