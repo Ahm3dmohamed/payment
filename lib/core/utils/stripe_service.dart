@@ -1,3 +1,4 @@
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:payment/core/utils/api_keys.dart';
 import 'package:payment/core/utils/api_service.dart';
 import 'package:payment/features/checkout/data/models/payment_intent_input_model.dart';
@@ -46,5 +47,15 @@ class StripeService {
     // static String getPaymentIntentRetrieveUrl() {
     //   return 'https://api.stripe.com/v1/payment_intents/';
     // }
+  }
+
+  Future initPaymentSheet({required String paymentIntentClientSecret}) async {
+    Stripe.instance.initPaymentSheet(
+      paymentSheetParameters: SetupPaymentSheetParameters(
+        // Main params
+        merchantDisplayName: 'Ahmed Hamada',
+        paymentIntentClientSecret: paymentIntentClientSecret,
+      ),
+    );
   }
 }
