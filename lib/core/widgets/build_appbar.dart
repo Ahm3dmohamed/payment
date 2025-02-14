@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:payment/core/font_manager.dart';
-import 'package:payment/core/resources/color_manager.dart';
+import 'package:payment/core/utils/resources/color_manager.dart';
 
 // ignore: non_constant_identifier_names
 AppBar BuildAppBar({required String? title, Function()? onPressed}) {

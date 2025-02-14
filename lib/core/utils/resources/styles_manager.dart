@@ -1,7 +1,6 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_test_auth/core/resources/color_manager.dart';
 
-
 // TextStyle _getTextStyle(double fontSize, FontWeight fontWeight, Color color) {
 //   return TextStyle(
 //       fontSize: fontSize,

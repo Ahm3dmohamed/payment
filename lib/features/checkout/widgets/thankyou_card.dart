@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:payment/core/font_manager.dart';
-import 'package:payment/core/resources/assets_manager.dart';
-import 'package:payment/core/resources/color_manager.dart';
-import 'package:payment/core/resources/values_manager.dart';
+import 'package:payment/core/utils/resources/assets_manager.dart';
+import 'package:payment/core/utils/resources/color_manager.dart';
+import 'package:payment/core/utils/resources/values_manager.dart';
 import 'package:payment/features/checkout/widgets/card_info_data.dart';
 import 'package:payment/features/checkout/widgets/custom_barcode_paid_show.dart';
 import 'package:payment/features/checkout/widgets/payment_item_info.dart';

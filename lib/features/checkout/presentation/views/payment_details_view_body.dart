@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:payment/core/resources/values_manager.dart';
+import 'package:payment/core/utils/resources/values_manager.dart';
 import 'package:payment/core/widgets/checkout_button.dart';
 import 'package:payment/features/checkout/presentation/views/thanks_you_view.dart';
 import 'package:payment/features/checkout/widgets/custom_credit_card.dart';

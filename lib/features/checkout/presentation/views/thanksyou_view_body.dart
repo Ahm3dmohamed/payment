@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:payment/core/resources/values_manager.dart';
+import 'package:payment/core/utils/resources/values_manager.dart';
 import 'package:payment/core/widgets/custom_checkitem_color.dart';
 import 'package:payment/core/widgets/custom_dashedline.dart';
 import 'package:payment/features/checkout/widgets/thankyou_card.dart';

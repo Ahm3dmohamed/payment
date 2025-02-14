@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:payment/core/resources/values_manager.dart';
+import 'package:payment/core/utils/resources/values_manager.dart';
 import 'package:payment/core/widgets/checkout_button.dart';
 import 'package:payment/features/checkout/widgets/payment_methods_listview.dart';
 

@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:payment/core/resources/color_manager.dart';
-import 'package:payment/core/resources/values_manager.dart';
+import 'package:payment/core/utils/resources/color_manager.dart';
+import 'package:payment/core/utils/resources/values_manager.dart';
 
 class PaymentMethodItem extends StatelessWidget {
   String image;

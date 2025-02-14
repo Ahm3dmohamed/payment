@@ -1,7 +1,7 @@
 // ✅ Widget مستقلة لعرض صورة المنتج
 import 'package:flutter/material.dart';
-import 'package:payment/core/resources/assets_manager.dart';
-import 'package:payment/core/resources/values_manager.dart';
+import 'package:payment/core/utils/resources/assets_manager.dart';
+import 'package:payment/core/utils/resources/values_manager.dart';
 
 class ProductImage extends StatelessWidget {
   const ProductImage({super.key, required this.size});
