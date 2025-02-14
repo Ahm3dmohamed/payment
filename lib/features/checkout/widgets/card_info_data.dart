@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:payment/core/font_manager.dart';
-import 'package:payment/core/resources/assets_manager.dart';
-import 'package:payment/core/resources/values_manager.dart';
+import 'package:payment/core/utils/resources/assets_manager.dart';
+import 'package:payment/core/utils/resources/values_manager.dart';
 
 class CardInfoWidget extends StatelessWidget {
   const CardInfoWidget({

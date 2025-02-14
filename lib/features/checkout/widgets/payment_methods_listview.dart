@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:payment/core/resources/assets_manager.dart';
-import 'package:payment/core/resources/values_manager.dart';
+import 'package:payment/core/utils/resources/assets_manager.dart';
+import 'package:payment/core/utils/resources/values_manager.dart';
 import 'package:payment/features/checkout/widgets/payment_method_item.dart';
 
 class PaymentMethods extends StatefulWidget {

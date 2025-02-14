@@ -48,9 +48,6 @@ abstract class Styles {
   static var style18;
 }
 
-
-
-
 // class FontConstants {
 //   static const String fontFamily = "Poppins";
 // }
@@ -73,4 +70,3 @@ abstract class Styles {
 //   static const double s22 = 22.0;
 //   static const double s24 = 24.0;
 // }
-

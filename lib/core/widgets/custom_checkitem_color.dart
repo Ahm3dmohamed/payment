@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:payment/core/resources/values_manager.dart';
+import 'package:payment/core/utils/resources/values_manager.dart';
 
 class CustomCheckItem extends StatelessWidget {
   const CustomCheckItem({
