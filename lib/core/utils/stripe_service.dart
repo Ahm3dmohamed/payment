@@ -58,4 +58,16 @@ class StripeService {
       ),
     );
   }
+
+  Future presentPaymentSheet() async {
+    await Stripe.instance.presentPaymentSheet();
+  }
+
+  Future doPayment(
+      {required PaymentIntentInputModel paymentIntentInputModel}) async {
+    var paymentIntentModel = await createPaymentIntent(paymentIntentInputModel);
+    await initPaymentSheet(
+        paymentIntentClientSecret: paymentIntentModel.clientSecret!);
+    await presentPaymentSheet();
+  }
 }
