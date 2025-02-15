@@ -1,4 +1,4 @@
-part of 'payment_cubit_cubit.dart';
+part of 'payment_cubit.dart';
 
 @immutable
 sealed class PaymentCubitState {}
