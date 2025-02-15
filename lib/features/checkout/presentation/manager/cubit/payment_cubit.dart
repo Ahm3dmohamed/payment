@@ -18,7 +18,7 @@ class PaymentCubit extends Cubit<PaymentCubitState> {
     emit(PaymentLoading());
 
     try {
-      // 1️⃣ Create a PaymentIntent using Stripe API
+      //  Create a PaymentIntent using Stripe API
       var paymentIntent =
           await stripeService.createPaymentIntent(paymentIntentInputModel);
       if (paymentIntent == null || paymentIntent.clientSecret == null) {
@@ -26,7 +26,7 @@ class PaymentCubit extends Cubit<PaymentCubitState> {
         return;
       }
 
-      // 2️⃣ Initialize Stripe Payment Sheet
+      //  Initialize Stripe Payment Sheet
       bool initSuccess = await stripeService.initPaymentSheet(
         paymentIntentClientSecret: paymentIntent.clientSecret!,
       );
@@ -35,14 +35,14 @@ class PaymentCubit extends Cubit<PaymentCubitState> {
         return;
       }
 
-      // 3️⃣ Present the Stripe Payment Sheet to user
+      //  Present the Stripe Payment Sheet to user
       bool paymentSuccess = await stripeService.presentPaymentSheet();
       if (!paymentSuccess) {
         emit(PaymentFailure("Payment was not completed."));
         return;
       }
 
-      // 4️⃣ Call your backend to confirm payment (if needed)
+      //  Call your backend to confirm payment (if needed)
       var data = await checkoutRepo.doPayment(
           paymentIntentInputModel: paymentIntentInputModel);
       data.fold(

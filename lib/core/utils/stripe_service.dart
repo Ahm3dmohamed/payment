@@ -66,4 +66,21 @@ class StripeService {
 
     return await presentPaymentSheet();
   }
+
+  Future<PaymentIntentModel?> createCustomer(
+      PaymentIntentInputModel paymentIntentInputModel) async {
+    try {
+      var response = await apiService.post(
+        body: paymentIntentInputModel.toJson(),
+        contentType: Headers.formUrlEncodedContentType,
+        url: "https://api.stripe.com/v1/payment_intents",
+        token: ApiKeys.secrretKey,
+      );
+
+      return PaymentIntentModel.fromJson(response.data);
+    } catch (e) {
+      print("Stripe API Error: $e");
+      return null;
+    }
+  }
 }

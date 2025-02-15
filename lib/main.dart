@@ -20,11 +20,9 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 //  paymentIntentObject Create payment intent (amount, currency)
 // init payment sheet(paymentIntentClientSecret)
 // present payment sheet()
-
 
 // Future<void> initPaymentSheet() async {
 //     try {
@@ -36,7 +34,7 @@ class MyApp extends StatelessWidget {
 //           // Main params
 //           merchantDisplayName: 'Flutter Stripe Store Demo',
 //           paymentIntentClientSecret: data['paymentIntent'],
-          
+
 //           style: ThemeMode.dark,
 //         ),
 //       );

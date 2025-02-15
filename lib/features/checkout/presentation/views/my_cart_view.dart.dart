@@ -37,42 +37,45 @@ class _MyCartViewState extends State<MyCartView> {
     return Scaffold(
       backgroundColor: ColorManager.primary,
       appBar: BuildAppBar(title: "My Cart"),
-      body: Column(
-        children: [
-          ProductImage(size: size),
-          ProductInfo(price: _price, total: total),
-          QuantityControls(
-            quantity: _quantity,
-            onIncrease: () => _updateQuantity(1),
-            onDecrease: () => _updateQuantity(-1),
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ProductImage(size: size),
+            ProductInfo(price: _price, total: total),
+            QuantityControls(
+              quantity: _quantity,
+              onIncrease: () => _updateQuantity(1),
+              onDecrease: () => _updateQuantity(-1),
+            ),
 
-          const SizedBox(height: AppSize.s16),
-          //  Add a button to checkout
-          CheckoutButton(
-            text: "Checkout",
-            onPressed: () {
-              showModalBottomSheet(
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                )),
-                context: context,
-                builder: (context) {
-                  return BlocProvider(
-                    create: (context) => PaymentCubit(
-                      CheckoutRepoImpl(),
-                      StripeService(),
-                    ),
-                    child: const PaymentMethodsBottomSheet(),
-                  );
-                },
-              );
-            },
-            total: total,
-          ),
-        ],
+            const SizedBox(height: AppSize.s16),
+            //  Add a button to checkout
+            CheckoutButton(
+              text: "Checkout",
+              onPressed: () {
+                showModalBottomSheet(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  )),
+                  context: context,
+                  builder: (context) {
+                    return BlocProvider(
+                      create: (context) => PaymentCubit(
+                        CheckoutRepoImpl(),
+                        StripeService(),
+                      ),
+                      child: const PaymentMethodsBottomSheet(),
+                    );
+                  },
+                );
+              },
+              total: total,
+            ),
+          ],
+        ),
       ),
     );
   }
