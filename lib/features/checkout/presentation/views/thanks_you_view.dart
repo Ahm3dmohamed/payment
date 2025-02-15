@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:payment/core/widgets/build_appbar.dart';
 import 'package:payment/features/checkout/presentation/views/thanksyou_view_body.dart';
 
 class ThanksYouView extends StatelessWidget {

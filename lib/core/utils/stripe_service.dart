@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:payment/core/utils/api_keys.dart';
 import 'package:payment/core/utils/api_service.dart';
@@ -6,68 +7,63 @@ import 'package:payment/features/checkout/data/models/payment_intent_model/payme
 
 class StripeService {
   final ApiService apiService = ApiService();
-  Future<PaymentIntentModel> createPaymentIntent(
+
+  Future<PaymentIntentModel?> createPaymentIntent(
       PaymentIntentInputModel paymentIntentInputModel) async {
-    var responce = await apiService.post(
-        body: paymentIntentInputModel.toJson,
+    try {
+      var response = await apiService.post(
+        body: paymentIntentInputModel.toJson(),
+        contentType: Headers.formUrlEncodedContentType,
         url: "https://api.stripe.com/v1/payment_intents",
-        token: ApiKeys.secrretKey);
-    var paymentIntentModel = PaymentIntentModel.fromJson(responce.data);
-    return paymentIntentModel;
-    // static String getPublishableKey() {
-    //   return 'pk_test_51J3ZQvK5';
-    // }
-    // static String getSecretKey() {
-    //   return 'sk_test_51J3ZQvK5';
-    // }
-    // static String getPaymentUrl() {
-    //   return 'https://api.stripe.com/v1/payment_intents';
-    // }
-    // static String getPaymentMethodUrl() {
-    //   return 'https://api.stripe.com/v1/payment_methods';
-    // }
-    // static String getSecretPaymentUrl() {
-    //   return 'https://api.stripe.com/v1/payment_intents/';
-    // }
-    // static String getSecretPaymentMethodUrl() {
-    //   return 'https://api.stripe.com/v1/payment_methods/';
-    // }
-    // static String getPaymentIntentUrl() {
-    //   return 'https://api.stripe.com/v1/payment_intents/';
-    // }
-    // static String getPaymentIntentCaptureUrl() {
-    //   return 'https://api.stripe.com/v1/payment_intents/';
-    // }
-    // static String getPaymentIntentConfirmUrl() {
-    //   return 'https://api.stripe.com/v1/payment_intents/';
-    // }
-    // static String getPaymentIntentCancelUrl() {
-    //   return 'https://api.stripe.com/v1/payment_intents/';
-    // }
-    // static String getPaymentIntentRetrieveUrl() {
-    //   return 'https://api.stripe.com/v1/payment_intents/';
-    // }
+        token: ApiKeys.secrretKey,
+      );
+
+      return PaymentIntentModel.fromJson(response.data);
+    } catch (e) {
+      print("Stripe API Error: $e");
+      return null;
+    }
   }
 
-  Future initPaymentSheet({required String paymentIntentClientSecret}) async {
-    Stripe.instance.initPaymentSheet(
-      paymentSheetParameters: SetupPaymentSheetParameters(
-        // Main params
-        merchantDisplayName: 'Ahmed Hamada',
-        paymentIntentClientSecret: paymentIntentClientSecret,
-      ),
-    );
+  Future<bool> initPaymentSheet(
+      {required String paymentIntentClientSecret}) async {
+    try {
+      await Stripe.instance.initPaymentSheet(
+        paymentSheetParameters: SetupPaymentSheetParameters(
+          merchantDisplayName: 'Ahmed Hamada',
+          paymentIntentClientSecret: paymentIntentClientSecret,
+        ),
+      );
+      return true;
+    } catch (e) {
+      print("Payment Sheet Init Error: $e");
+      return false;
+    }
   }
 
-  Future presentPaymentSheet() async {
-    await Stripe.instance.presentPaymentSheet();
+  Future<bool> presentPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet();
+      return true;
+    } catch (e) {
+      print("Payment Sheet Error: $e");
+      return false;
+    }
   }
 
-  Future doPayment(
+  Future<bool> doPayment(
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
     var paymentIntentModel = await createPaymentIntent(paymentIntentInputModel);
-    await initPaymentSheet(
+    if (paymentIntentModel == null || paymentIntentModel.clientSecret == null) {
+      print("Failed to create PaymentIntent");
+      return false;
+    }
+
+    bool initSuccess = await initPaymentSheet(
         paymentIntentClientSecret: paymentIntentModel.clientSecret!);
-    await presentPaymentSheet();
+
+    if (!initSuccess) return false;
+
+    return await presentPaymentSheet();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:payment/core/widgets/checkout_button.dart';
+import 'package:payment/features/checkout/data/models/payment_intent_input_model.dart';
 import 'package:payment/features/checkout/presentation/manager/cubit/payment_cubit_cubit.dart';
-import 'package:payment/features/checkout/presentation/views/payment_details_view.dart';
 import 'package:payment/features/checkout/presentation/views/thanks_you_view.dart';
 
 class CustomBottonBlocConsumer extends StatelessWidget {
@@ -21,6 +21,7 @@ class CustomBottonBlocConsumer extends StatelessWidget {
             ),
           );
         } else if (state is PaymentFailure) {
+          Navigator.of(context).pop();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(state.errMessage),
@@ -32,8 +33,17 @@ class CustomBottonBlocConsumer extends StatelessWidget {
         return CheckoutButton(
           isLoading: state is PaymentLoading ? true : false,
           text: "Continue",
-          onPressed: () {},
-          total: 0,
+          onPressed: () {
+            PaymentIntentInputModel paymentIntentInputModel =
+                PaymentIntentInputModel(
+              amount: "100",
+              currency: "USD",
+            );
+            BlocProvider.of<PaymentCubit>(context).doPayment(
+              paymentIntentInputModel,
+            );
+          },
+          total: 100,
         );
       },
     );

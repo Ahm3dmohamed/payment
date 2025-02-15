@@ -26,11 +26,11 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(child: PaymentMethods()),
-          SliverToBoxAdapter(
-              child: CustomCreditCard(
-            formKey: formKey,
-            autovalidateMode: autovalidateMode,
-          )),
+          // SliverToBoxAdapter(
+          //     child: CustomCreditCard(
+          //   formKey: formKey,
+          //   autovalidateMode: autovalidateMode,
+          // )),
           SliverFillRemaining(
               fillOverscroll: false,
               child: Align(
