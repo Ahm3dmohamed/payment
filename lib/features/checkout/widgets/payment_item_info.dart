@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:payment/core/font_manager.dart';
 import 'package:payment/core/utils/resources/values_manager.dart';
 
+// ignore: must_be_immutable
 class PaymentItemInfo extends StatelessWidget {
   String text, textInfo;
   PaymentItemInfo({required this.text, required this.textInfo, super.key});
