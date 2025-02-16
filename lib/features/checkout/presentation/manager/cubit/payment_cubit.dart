@@ -13,51 +13,24 @@ class PaymentCubit extends Cubit<PaymentCubitState> {
   final CheckoutRepo checkoutRepo;
   final StripeService stripeService;
 
-  Future<void> doPayment(
-      PaymentIntentInputModel paymentIntentInputModel) async {
+  Future<void> doPayment(PaymentIntentInputModel inputModel) async {
     emit(PaymentLoading());
 
     try {
-      //  Create a PaymentIntent using Stripe API
-      var paymentIntent =
-          await stripeService.createPaymentIntent(paymentIntentInputModel);
-      if (paymentIntent == null || paymentIntent.clientSecret == null) {
-        emit(PaymentFailure("Failed to create payment intent."));
+      if (!await stripeService.doPayment(inputModel)) {
+        emit(PaymentFailure("Payment process failed."));
         return;
       }
 
-      //  Initialize Stripe Payment Sheet
-      bool initSuccess = await stripeService.initPaymentSheet(
-        paymentIntentClientSecret: paymentIntent.clientSecret!,
-      );
-      if (!initSuccess) {
-        emit(PaymentFailure("Failed to initialize Stripe Payment Sheet."));
-        return;
-      }
-
-      //  Present the Stripe Payment Sheet to user
-      bool paymentSuccess = await stripeService.presentPaymentSheet();
-      if (!paymentSuccess) {
-        emit(PaymentFailure("Payment was not completed."));
-        return;
-      }
-
-      //  Call your backend to confirm payment (if needed)
-      var data = await checkoutRepo.doPayment(
-          paymentIntentInputModel: paymentIntentInputModel);
+      var data =
+          await checkoutRepo.doPayment(paymentIntentInputModel: inputModel);
       data.fold(
-        (failure) {
-          log("Payment failed: ${failure.errmessage}");
-          emit(PaymentFailure(failure.errmessage));
-        },
-        (success) {
-          log("Payment successful! Navigating to Thank You View...");
-          emit(PaymentSuccess());
-        },
+        (failure) => emit(PaymentFailure(failure.errmessage)),
+        (_) => emit(PaymentSuccess()),
       );
-    } catch (e, stackTrace) {
-      log("Unexpected error during payment: $e", stackTrace: stackTrace);
-      emit(PaymentFailure("An unexpected error occurred. Please try again."));
+    } catch (e) {
+      log("Payment Error: $e");
+      emit(PaymentFailure("An error occurred. Please try again."));
     }
   }
 }
