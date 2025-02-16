@@ -1,0 +1,38 @@
+{
+    "items": [
+        {
+            "name": "Apple",
+            "quantity": 4,
+            "price": "5",
+            "currency": "USD"
+        },
+        {
+            "name": "banana",
+            "quantity": 5,
+            "price": "10",
+            "currency": "USD"
+        },
+        {
+            "name": "orange",
+            "quantity": 6,
+            "price": "15",
+            "currency": "USD"
+        },
+        {
+            "name": "mango",
+            "quantity": 7,
+            "price": "20",
+            "currency": "USD"
+        }
+    ],
+    "shipping_address": {
+        "recipient_name": "Ahmed",
+        "line1": "Mansoura",
+        "line2": "",
+        "city": "sinbillawin",
+        "country_code": "EG",
+        "postal_code": "12345",
+        "phone": "+01032695113",
+        "state": "Dakahlia"
+    }
+}
