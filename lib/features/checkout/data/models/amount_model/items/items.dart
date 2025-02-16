@@ -1,24 +1,20 @@
-import 'item.dart';
-import 'shipping_address.dart';
+import 'package:payment/features/checkout/data/models/amount_model/items/order_item_model.dart';
+
+import 'order_item_model.dart';
 
 class Items {
-  List<OrderItemModel>? items;
-  ShippingAddress? shippingAddress;
+  final List<OrderItemModel> items;
 
-  Items({this.items, this.shippingAddress});
+  Items({required this.items});
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         items: (json['items'] as List<dynamic>?)
-            ?.map((e) => OrderItemModel.fromJson(e as Map<String, dynamic>))
-            .toList(),
-        shippingAddress: json['shipping_address'] == null
-            ? null
-            : ShippingAddress.fromJson(
-                json['shipping_address'] as Map<String, dynamic>),
+                ?.map((e) => OrderItemModel.fromJson(e as Map<String, dynamic>))
+                .toList() ??
+            [],
       );
 
   Map<String, dynamic> toJson() => {
-        'items': items?.map((e) => e.toJson()).toList(),
-        'shipping_address': shippingAddress?.toJson(),
+        'items': items.map((e) => e.toJson()).toList(),
       };
 }

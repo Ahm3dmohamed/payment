@@ -4,19 +4,18 @@ import 'package:payment/core/utils/resources/values_manager.dart';
 import 'package:payment/features/checkout/widgets/payment_method_item.dart';
 
 class PaymentMethods extends StatefulWidget {
-  PaymentMethods({super.key});
+  final Function(int) onMethodSelected;
+
+  const PaymentMethods({super.key, required this.onMethodSelected});
 
   @override
   State<PaymentMethods> createState() => _PaymentMethodsState();
 }
 
 class _PaymentMethodsState extends State<PaymentMethods> {
-  List<String> paymentItems = [
-    IconsAssets.creditIcon,
-    ImageAssets.payPalLogo,
-    // IconsAssets.applePay,
-  ];
+  List<String> paymentItems = [IconsAssets.creditIcon, ImageAssets.payPalLogo];
   int activeIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -28,14 +27,15 @@ class _PaymentMethodsState extends State<PaymentMethods> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppPadding.p12),
             child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    activeIndex = index;
-                  });
-                },
-                child: PaymentMethodItem(
-                    isActive: activeIndex == index,
-                    image: paymentItems[index])),
+              onTap: () {
+                setState(() => activeIndex = index);
+                widget.onMethodSelected(index);
+              },
+              child: PaymentMethodItem(
+                isActive: activeIndex == index,
+                image: paymentItems[index],
+              ),
+            ),
           );
         },
       ),

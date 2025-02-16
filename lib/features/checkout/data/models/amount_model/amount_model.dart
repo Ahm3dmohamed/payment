@@ -11,9 +11,8 @@ class AmountModel {
   factory AmountModel.fromJson(Map<String, dynamic> json) => AmountModel(
         total: json['total'] as String?,
         currency: json['currency'] as String?,
-        details: json['details'] == null
-            ? null
-            : Details.fromJson(json['details'] as Map<String, dynamic>),
+        details:
+            json['details'] == null ? null : Details.fromJson(json['details']),
       );
 
   Map<String, dynamic> toJson() => {

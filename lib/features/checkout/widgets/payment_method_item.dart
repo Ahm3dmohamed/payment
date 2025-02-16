@@ -19,7 +19,7 @@ class PaymentMethodItem extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 600),
       height: AppQuery.height(context, 12),
-      width: AppQuery.width(context, 28),
+      width: AppQuery.width(context, 30),
       decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -41,7 +41,7 @@ class PaymentMethodItem extends StatelessWidget {
         ),
         child: Image.asset(
           image,
-          scale: 9,
+          scale: 8,
           fit: BoxFit.scaleDown,
         ),
       ),
