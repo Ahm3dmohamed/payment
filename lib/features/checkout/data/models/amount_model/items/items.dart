@@ -2,14 +2,14 @@ import 'item.dart';
 import 'shipping_address.dart';
 
 class Items {
-  List<Item>? items;
+  List<OrderItemModel>? items;
   ShippingAddress? shippingAddress;
 
   Items({this.items, this.shippingAddress});
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         items: (json['items'] as List<dynamic>?)
-            ?.map((e) => Item.fromJson(e as Map<String, dynamic>))
+            ?.map((e) => OrderItemModel.fromJson(e as Map<String, dynamic>))
             .toList(),
         shippingAddress: json['shipping_address'] == null
             ? null
